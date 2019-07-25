@@ -1,0 +1,88 @@
+.Menu{
+    padding: 10px 0;
+    width: 1200px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    grid-row-gap: 10px;
+    transition: .5s;
+    .item{
+        margin-top: 10px !important;
+        margin-left: 5%;
+        height: 300px;
+        width: 20%;
+        position: relative;
+        overflow: hidden;
+        border-radius: 90px;
+        img{
+            width: 100%;
+            height: 80%;
+            margin:auto;
+        }
+        .button{
+            color: #aa0000;
+            font-weight: 900;
+            position: absolute;
+            top: 70px;
+            right: 3px;
+            cursor: pointer;
+            user-select: none;
+            border: #aa0000 2px solid;
+            padding: 0 5px;
+            transition: .5s;
+            &:hover{
+                border-color:#ff0000;
+                color:#ff0000;    
+            }
+        }
+        .button.add{
+            position: absolute;
+            top:150px;
+            height: 25px;
+        }
+        .container{
+            display: flex;
+            justify-content: center;
+            background-color:#555;
+           padding-bottom: 10px; 
+            .title{
+                text-align: center;
+                margin: 10px;
+                text-transform: capitalize;
+            }
+        }
+
+    }
+    .item.input{
+        transition: .5s;
+        height: auto;
+        &:hover{
+            background: #aaa;
+        }
+        section{
+            height: 180px;
+            .dropzone {
+                position: absolute;
+                top: 60px;
+                width: 80%;
+                margin: 0 10%;
+                font-weight: 600;
+                font-size: 20px;
+            }
+        }
+    }
+    .container.input{
+        display: block;
+        justify-content: center;
+        padding:0;
+        input{
+            width: 90%;
+            font-size: 20px;
+            border-radius: 20px;
+            margin:15px 10px !important; 
+            text-align: center;
+            
+        }
+    }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "menu",
+  "version": "1.0.0",
+  "description": "nmp run dev",
+  "main": "index.js",
+  "scripts": {
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"node server\" \"npm run client\" "
+  },
+  "author": "arnoldas valasinas",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^4.1.1",
+    "express": "^4.17.1",
+    "mongoose": "^5.6.6",
+    "multer": "^1.4.2",
+    "nodemon": "^1.19.1"
+  }
+}
