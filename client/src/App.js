@@ -7,12 +7,8 @@ class App extends React.Component{
  constructor(props){
    super(props); 
    this.state={
-    name:null,
-    price:null,
-    fileTypes:['image/jpeg','image/png','image/gif']
   }
   axios.get('/api/').then(res=>{
-
     const Coffee =res.data.coffee;
     this.setState({Coffee})
  })
@@ -26,6 +22,10 @@ class App extends React.Component{
     })
     this.setState({Coffee});
    }
+   addOne=(x)=>{
+      const list = {...this.state.Coffee};
+      x.price&& x.name && x.uploaded &&  console.warn(x);
+   }
   
   render(){
 
@@ -35,7 +35,7 @@ class App extends React.Component{
         <Menu
          menu={this.state.Coffee}
          removeOne={this.removeOne}
-
+         addOne={this.addOne}
         />
       
       </div>

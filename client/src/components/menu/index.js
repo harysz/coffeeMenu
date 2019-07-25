@@ -1,36 +1,37 @@
 import React from 'react';
-import Dropzone from 'react-dropzone';
+import questionmark from './questionMark.png'
 import './menu.scss';
-
+import axios from 'axios';
 class Menu extends React.Component{
  state={
-    price:null,
-    name:null,      
-    file:''
+    price:null, 
+    name:null,
+    file:questionmark,     
+    uploaded:false
  }
- uploadImage= (files)=>{
-     this.setState({file:files[0]})
+ uploadImage= (file)=>{
+   
+     const reader= new FileReader();
+     reader.readAsDataURL(file.target.files[0])
+     reader.onloadend = file =>{
+         this.setState({file:reader.result,uploaded:true})
+     }
  };
  handleChange= event=>{
-     event.target.type==='text' && this.setState({name:event.target.value});
+     event.target.type==='text' &&  this.setState({name:event.target.value});
      event.target.type==='number' && this.setState({price:event.target.value});
   }
-
+  
     render(){
     return(
         <div className='Menu'>
            <div className='item input'>
                 <div className='container input'>
-                <Dropzone onDrop={acceptedFiles => console.log(acceptedFiles)}>
-                    {({getRootProps, getInputProps}) => (
-                        <section>
-                            <p className='dropzone'>Drag 'n' drop some files here, or click to select files</p> 
-                        </section>
-                    )}
-                </Dropzone>
-                    <input placeholder='Name ' type='text' onChange={this.handleChange.bind(this)}></input>
-                    <input placeholder='Price' type='number' onChange={this.handleChange.bind(this)}></input>
-                    <div className='button add'>ADD</div>
+                    <img src={this.state.uploaded? this.state.file :questionmark } alt=''></img> 
+                    <input type='file' onChange={this.uploadImage}/>
+                    <input placeholder='Name ' required type='text' onChange={this.handleChange.bind(this)}></input>
+                    <input placeholder='Price' required type='number' onChange={this.handleChange.bind(this)}></input>
+                    <div className='buttonAdd' onClick={()=>this.props.addOne(this.state)} >ADD</div>
                 </div>
             </div>
                  {this.props.menu && this.props.menu.map((item,i)=>{
