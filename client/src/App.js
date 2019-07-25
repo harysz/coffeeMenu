@@ -23,9 +23,13 @@ class App extends React.Component{
     this.setState({Coffee});
    }
    addOne=(x)=>{
-      const list = {...this.state.Coffee};
-      x.price&& x.name && x.uploaded &&  console.warn(x);
-   }
+     console.log(x);
+    const obj={name:x.name,price:x.price,url:x.file};
+    console.table(obj);
+    this.setState(prevState =>({
+      Coffee:[...prevState.Coffee,obj]
+    }))
+  }
   
   render(){
 
