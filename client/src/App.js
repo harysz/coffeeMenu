@@ -24,7 +24,8 @@ class App extends React.Component{
    }
    addOne=(x)=>{
      console.log(x);
-    const obj={name:x.name,price:x.price,url:x.file};
+     const obj={name:x.name,price:x.price,url:x.file};
+     x.name===null && (x.price===null && (x.file===null && console.log('this is bad')));
     console.table(obj);
     this.setState(prevState =>({
       Coffee:[...prevState.Coffee,obj]
