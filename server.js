@@ -1,24 +1,35 @@
 const express = require('express');
 const app = express();
 const coffee = require('./data/coffee');
-const cors =require ('cors');
-var corsOptions ={
-    origin:'*',
-    optionSuccessStatus:200,
-}
+const bodyParser = require('body-parser');
+const path= require('path');
 
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
 
 
 
 const port = process.env.PORT || 9000;
-app.use('/public', express.static(__dirname + '/public'));
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.join( __dirname + 'build')));
 
 app.get('/api/', (req, res) => {
-    res.json({coffee});
+    
+    res.json(coffee.coffee);
+
+})
+app.get('*',(req,res)=>{
+    res.sendFile(path.join(__dirname, 'build/index.hrml' ))
+});
+
+app.post('/api/upload/',(req,res)=>{
+ 
+    let name = req.body.name;
+    let price = req.body.price;
+    let url = req.body.url;
+    res.end('got em');
 })
 
-app.use(cors(corsOptions))
+
 app.listen(port, () => {
     console.log(`Server is running on port ${port}.`)
 })

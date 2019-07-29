@@ -1,6 +1,8 @@
 import React from 'react';
 import questionmark from './questionMark.png'
 import './menu.scss';
+
+
 class Menu extends React.Component{
  state={
     price:null, 
@@ -22,13 +24,19 @@ class Menu extends React.Component{
      event.target.type==='number' && this.setState({price:event.target.value});
   }
   handleClick=()=>{
-      this.setState({
-          price:null,
-          name:null,
-          fileView:questionmark,
-          uploaded:false,
-          file:null
-        })
+      const obj=this.state;
+      if(obj.name!=null & obj.price!=null & obj.uploaded===true){
+        this.props.addOne(this.state);  
+        this.setState({
+              price:null,
+              name:null,
+              fileView:questionmark,
+              uploaded:false,
+              file:null
+            })
+        }else{
+            window.alert('take a file, make a price, get the name, and press add :)')
+        }
   }
     render(){
     return(
@@ -39,7 +47,7 @@ class Menu extends React.Component{
                     <input type='file' onChange={this.uploadImage}/>
                     <input placeholder='Name ' value={this.state.name? this.state.name:''} required type='text' onChange={this.handleChange.bind(this)}></input>
                     <input placeholder='Price' required type='number' value={this.state.price? this.state.price:''} onChange={this.handleChange.bind(this)}></input>
-                    <div className='buttonAdd' onClick={()=>{this.props.addOne(this.state);this.handleClick()}}
+                    <div className='buttonAdd' onClick={()=>{this.handleClick()}}
                      >ADD</div>
                 </div>
             </div>

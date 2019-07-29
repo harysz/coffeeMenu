@@ -9,7 +9,7 @@ class App extends React.Component{
    this.state={
   }
   axios.get('/api/').then(res=>{
-    const Coffee =res.data.coffee;
+    const Coffee =res.data;
     this.setState({Coffee})
  })
 }
@@ -25,8 +25,10 @@ class App extends React.Component{
    addOne=(x)=>{
      console.log(x);
      const obj={name:x.name,price:x.price,url:x.file};
-     x.name===null && (x.price===null && (x.file===null && console.log('this is bad')));
     console.table(obj);
+    axios.post('/api/upload/', obj).then(res=>{
+      console.log(res);
+    })
     this.setState(prevState =>({
       Coffee:[...prevState.Coffee,obj]
     }))
